@@ -183,19 +183,27 @@ a {
     text-decoration: underline;
 }
 
-/* @media (min-width: 1200px) {
+@media (min-width: 1200px) {
     .image img {
-        width: 100%;
-        margin-top: 16px;
-        margin-bottom: 16px;
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
     }
-}
-
-@media (min-width: 576px) {
+    }
+    
+    @media (min-width: 576px) and (max-width: 1199px) {
     .image img {
-        position: absolute;
-        width: 50%;
-        margin-top: 8px;
-        margin-bottom: 8px;
+    position: absolute;
+    width: 50%;
+    margin-top: 8px;
+    margin-bottom: 8px;
     }
-} */
+    }
+    
+    @media (max-width: 575px) {
+    .image img {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    }
+    }
