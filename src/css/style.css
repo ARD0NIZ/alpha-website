@@ -335,12 +335,13 @@
   grid-template-columns: 1fr 340px;
   gap: 24px;
   margin-top: 24px;
+  align-items: start;
 }
 
 .projects-main {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
 }
 
 .projects-main .section-subtitle {
@@ -348,9 +349,18 @@
   margin-bottom: 16px;
 }
 
+.projects-main iframe {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  min-height: 500px;
+  display: block;
+}
+
 .projects-sidebar {
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
 .projects-sidebar .section-subtitle {
@@ -363,7 +373,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 500px;
+  min-height: 500px;
   text-align: center;
   transition: all var(--duration) var(--transition);
 }
