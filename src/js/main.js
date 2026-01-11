@@ -145,4 +145,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setTimeout(syncGradients, 80);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) syncGradients(); });
+
+  // Contact Form Handler
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+      };
+
+      // Status message
+      formStatus.style.display = 'block';
+      formStatus.style.background = 'rgba(0, 217, 255, 0.1)';
+      formStatus.style.borderColor = 'rgba(0, 217, 255, 0.2)';
+      formStatus.style.color = 'var(--text-primary)';
+      formStatus.textContent = 'Sending...';
+
+      try {
+        // Send to Formspree
+        const response = await fetch('https://formspree.io/f/xvzzpngz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          formStatus.style.background = 'rgba(34, 197, 94, 0.1)';
+          formStatus.style.borderColor = 'rgba(34, 197, 94, 0.2)';
+          formStatus.style.color = '#22c55e';
+          formStatus.textContent = '✓ Message sent successfully!';
+          contactForm.reset();
+          setTimeout(() => { formStatus.style.display = 'none'; }, 5000);
+        } else {
+          throw new Error('Failed to send');
+        }
+      } catch (error) {
+        console.error('Form error:', error);
+        formStatus.style.background = 'rgba(239, 68, 68, 0.1)';
+        formStatus.style.borderColor = 'rgba(239, 68, 68, 0.2)';
+        formStatus.style.color = '#ef4444';
+        formStatus.textContent = '✗ Error sending message. Please try again.';
+      }
+    });
+  }
 });

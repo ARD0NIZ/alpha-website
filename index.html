@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ARD0NIZ — Bot Developer & Community Leader. Discover my projects and join the community.">
   <meta name="theme-color" content="#05060a">
+  
+  <!-- Open Graph Meta Tags (für WhatsApp, Discord, etc.) -->
+  <meta property="og:title" content="ARD0NIZ — Bot Developer">
+  <meta property="og:description" content="Passionate bot developer since 2018. Building bots, growing communities. Let's code together! 🚀">
+  <meta property="og:image" content="src/assets/icons/ble.jpg">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:url" content="https://ard0niz.github.io/alpha-website">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ARD0NIZ — Bot Developer">
+  <meta name="twitter:description" content="Passionate bot developer since 2018. Building bots, growing communities. Let's code together! 🚀">
+  <meta name="twitter:image" content="src/assets/icons/ble.jpg">
+  
   <title>ARD0NIZ — Bot Developer</title>
 
   <link rel="icon" href="src/assets/favicons/ble.jpg" type="image/jpeg">
@@ -12,30 +28,21 @@
   <link rel="stylesheet" href="src/css/style.css">
   
   <script>
-    // Nur auf GitHub Pages: Pfade mit /alpha-website/ präfixieren
     if (window.location.hostname.includes('github.io')) {
       const basePath = '/alpha-website';
-      document.addEventListener('DOMContentLoaded', () => {
+      const fixPaths = () => {
         document.querySelectorAll('img, link[rel="icon"]').forEach(el => {
-          if (el.src && el.src.includes('src/')) {
+          if (el.src && el.src.includes('src/') && !el.src.startsWith(basePath)) {
             el.src = basePath + '/' + el.src;
           }
-          if (el.href && el.href.includes('src/')) {
+          if (el.href && el.href.includes('src/') && !el.href.startsWith(basePath)) {
             el.href = basePath + '/' + el.href;
           }
         });
-      });
-      // MutationObserver für dynamisch hinzugefügte Elemente
-      const observer = new MutationObserver(() => {
-        document.querySelectorAll('img, link[rel="icon"]').forEach(el => {
-          if (el.src && el.src.includes('src/') && !el.src.includes(basePath)) {
-            el.src = basePath + '/' + el.src;
-          }
-          if (el.href && el.href.includes('src/') && !el.href.includes(basePath)) {
-            el.href = basePath + '/' + el.href;
-          }
-        });
-      });
+      };
+      fixPaths();
+      document.addEventListener('DOMContentLoaded', fixPaths);
+      const observer = new MutationObserver(fixPaths);
       observer.observe(document.body, {
         childList: true,
         subtree: true,
@@ -47,28 +54,26 @@
 </head>
 <body>
 
-  <!-- Header Component Placeholder -->
   <div id="site-header" role="doc-pageheader"></div>
 
-  <!-- Main Content -->
   <main>
     <div class="container">
 
-      <!-- Bio Section (About Me) -->
       <section class="bio-section" aria-labelledby="bio-title">
         <h2 id="bio-title" class="section-title">About Me</h2>
         <div class="bio-card glass">
-          <p>Hey everyone! I'm <strong>ARD0NIZ</strong>, a passionate bot developer who's been coding Discord bots since December 2018. Over the years, I've created <strong>20+ bots</strong> that help communities thrive and developers learn.</p>
+          <p>Hey everyone! I'm <strong>ARD0NIZ</strong>, a passionate bot developer who has been working on Discord bots since December 2018. Over the years, I've built <strong>5 bots</strong>, gaining experience and constantly evolving along the way.</p>
           
-          <p style="margin-top: 16px;">My flagship projects include <strong>Gold Bot</strong> and <strong>Seltix</strong>, both designed to bring unique features to Discord servers. In 2021, I took it a step further by creating a dedicated test server for developers—a space where you can add your own bots, test them, and collaborate with a growing team of <strong>30+ developers</strong>.</p>
+          <p style="margin-top: 16px;">Some of my earlier projects are no longer active, as I've shifted my focus to a new bot niche and continued developing new ideas. In 2021, I also set up a <strong>test server for developers</strong>, a place to experiment with bots, learn, and exchange knowledge.</p>
           
-          <p style="margin-top: 16px;">During the pandemic, we faced some inactive periods, but I'm determined to revitalize our community and push forward. I believe in the power of collaboration, and that's why I'm here: to build, support, and grow together.</p>
+          <p style="margin-top: 16px;">Like many projects, activity slowed down during the pandemic, but now I'm motivated to revive the community and build something new. Right now, I'm actively looking for members who want to learn, help out, or grow together.</p>
           
-          <p style="margin-top: 16px;"><strong>Can we help you?</strong> Absolutely! Our team specializes in <strong>HTML, CSS, Discord.js, BDFD, and Aoi.js</strong>. Whether you need coding assistance, want to learn, or are looking for a community to join, we've got you covered. Come check us out and become part of something amazing.</p>
+          <p style="margin-top: 16px;">If you're wondering what I can help with: I work with <strong>HTML, CSS, BDFD, Aoi.js, and ForgeScript</strong>. Whether you're looking for coding help, want to get into bot development, or are simply searching for a place to connect with others, you're very welcome to join.</p>
+          
+          <p style="margin-top: 16px; font-size: 1.1rem;">Let's build and grow together <strong style="color: var(--accent-1);">🚀</strong></p>
         </div>
       </section>
 
-      <!-- Bots Section -->
       <section id="bots" class="section" aria-labelledby="bots-title">
         <h2 id="bots-title" class="section-title">My Bots</h2>
 
@@ -103,7 +108,6 @@
         </div>
       </section>
 
-      <!-- Projects Section -->
       <section id="projects" class="section" aria-labelledby="projects-title">
         <h2 id="projects-title" class="section-title">My Projects</h2>
 
@@ -127,7 +131,6 @@
         </div>
       </section>
 
-      <!-- Connect Section -->
       <section id="connect" class="section" aria-labelledby="connect-title">
         <h2 id="connect-title" class="section-title">Get in Touch</h2>
 
@@ -135,23 +138,24 @@
           <div class="contact-card">
             <h3>Let's Talk</h3>
             <p class="lead">Have a question or want to collaborate? I'd love to hear from you.</p>
-            <form style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px;">
+            <form id="contactForm" style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px;">
               <label>
                 <span class="sr">Name</span>
-                <input type="text" placeholder="Your name" required>
+                <input type="text" name="name" placeholder="Your name" required>
               </label>
               <label>
                 <span class="sr">Email</span>
-                <input type="email" placeholder="you@example.com" required>
+                <input type="email" name="email" placeholder="you@example.com" required>
               </label>
               <label>
                 <span class="sr">Message</span>
-                <textarea rows="4" placeholder="Your message..." required></textarea>
+                <textarea rows="4" name="message" placeholder="Your message..." required></textarea>
               </label>
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Send</button>
                 <button type="reset" class="btn btn-ghost">Reset</button>
               </div>
+              <div id="formStatus" style="margin-top: 12px; padding: 12px; border-radius: var(--radius-md); display: none; text-align: center; font-weight: 500;"></div>
             </form>
           </div>
 
@@ -164,7 +168,7 @@
             </ul>
 
             <div class="contact-meta">
-              <p class="muted">Email: <a href="mailto:contact@example.com" style="color: var(--accent-1);">contact@example.com</a></p>
+              <p class="muted">Email: <a href="mailto:ardonizdevelopment@gmail.com" style="color: var(--accent-1);">ardonizdevelopment@gmail.com</a></p>
               <div class="social">
                 <a class="chip" href="https://github.com/ard0niz" target="_blank" rel="noopener">GitHub</a>
                 <a class="chip" href="https://ard0niz.github.io" target="_blank" rel="noopener">Website</a>
@@ -177,10 +181,8 @@
     </div>
   </main>
 
-  <!-- Footer Component Placeholder -->
   <div id="site-footer" role="doc-footer"></div>
 
-  <!-- Component Templates (Fallback) -->
   <template id="tpl-header">
     <header class="site-header" role="banner">
       <div class="container header-inner">
@@ -227,7 +229,7 @@
         </div>
 
         <div class="footer-links">
-          <a href="https://github.com/ard0niz" target="_blank" rel="noopener" title="Visit my GitHub">GitHub</a>
+          <a href="https://github.com/ard0niz/alpha-website" target="_blank" rel="noopener" title="Visit my GitHub">GitHub</a>
           <a href="https://discord.gg/5dGWwdHa3e" target="_blank" rel="noopener" title="Join Discord Server">Discord</a>
           <a href="#connect" title="Get in touch">Contact</a>
         </div>
