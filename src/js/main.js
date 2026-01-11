@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load components, then set year and handle initial hash
   Promise.all([
-    loadComponent('#site-header', 'components/header.html', 'tpl-header'),
-    loadComponent('#site-footer', 'components/footer.html', 'tpl-footer')
+    loadComponent('#site-header', 'src/components/header.html', 'tpl-header'),
+    loadComponent('#site-footer', 'src/components/footer.html', 'tpl-footer')
   ]).then(() => {
     console.log('Components loaded');
     const yearEl = document.getElementById('year');
