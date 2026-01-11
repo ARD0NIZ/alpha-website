@@ -10,6 +10,21 @@
   <link rel="icon" href="/alpha-website/src/assets/favicons/ble.jpg" type="image/jpeg">
   <link rel="stylesheet" href="/alpha-website/src/css/index.css">
   <link rel="stylesheet" href="/alpha-website/src/css/style.css">
+  
+  <script>
+    // Korrigiere CSS Pfade für lokale Umgebung vor dem Laden
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    if (!isGitHubPages) {
+      document.querySelectorAll('link[href^="/alpha-website/"]').forEach(link => {
+        link.href = link.href.replace('/alpha-website/', '');
+      });
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('img[src^="/alpha-website/"]').forEach(img => {
+          img.src = img.src.replace('/alpha-website/', '');
+        });
+      });
+    }
+  </script>
 </head>
 <body>
 
@@ -201,8 +216,21 @@
     </footer>
   </template>
 
+  <script>
+    // Auto-korrigiere Bildpfade für lokale und GitHub Pages Umgebungen
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = isGitHubPages ? '/alpha-website' : '';
+    
+    document.querySelectorAll('img, link[rel="icon"]').forEach(el => {
+      if (el.src && el.src.startsWith('/alpha-website/')) {
+        el.src = el.src.replace('/alpha-website/', basePath + '/');
+      }
+      if (el.href && el.href.startsWith('/alpha-website/')) {
+        el.href = el.href.replace('/alpha-website/', basePath + '/');
+      }
+    });
+  </script>
+
   <script src="src/js/main.js" defer></script>
-</body>
-</html>
 </body>
 </html>
