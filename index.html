@@ -7,21 +7,40 @@
   <meta name="theme-color" content="#05060a">
   <title>ARD0NIZ — Bot Developer</title>
 
-  <link rel="icon" href="/alpha-website/src/assets/favicons/ble.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="/alpha-website/src/css/index.css">
-  <link rel="stylesheet" href="/alpha-website/src/css/style.css">
+  <link rel="icon" href="src/assets/favicons/ble.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="src/css/index.css">
+  <link rel="stylesheet" href="src/css/style.css">
   
   <script>
-    // Korrigiere CSS Pfade für lokale Umgebung vor dem Laden
-    const isGitHubPages = window.location.hostname.includes('github.io');
-    if (!isGitHubPages) {
-      document.querySelectorAll('link[href^="/alpha-website/"]').forEach(link => {
-        link.href = link.href.replace('/alpha-website/', '');
-      });
+    // Nur auf GitHub Pages: Pfade mit /alpha-website/ präfixieren
+    if (window.location.hostname.includes('github.io')) {
+      const basePath = '/alpha-website';
       document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('img[src^="/alpha-website/"]').forEach(img => {
-          img.src = img.src.replace('/alpha-website/', '');
+        document.querySelectorAll('img, link[rel="icon"]').forEach(el => {
+          if (el.src && el.src.includes('src/')) {
+            el.src = basePath + '/' + el.src;
+          }
+          if (el.href && el.href.includes('src/')) {
+            el.href = basePath + '/' + el.href;
+          }
         });
+      });
+      // MutationObserver für dynamisch hinzugefügte Elemente
+      const observer = new MutationObserver(() => {
+        document.querySelectorAll('img, link[rel="icon"]').forEach(el => {
+          if (el.src && el.src.includes('src/') && !el.src.includes(basePath)) {
+            el.src = basePath + '/' + el.src;
+          }
+          if (el.href && el.href.includes('src/') && !el.href.includes(basePath)) {
+            el.href = basePath + '/' + el.href;
+          }
+        });
+      });
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['src', 'href']
       });
     }
   </script>
@@ -56,7 +75,7 @@
         <div class="bots-grid">
           <article class="bot-card glass">
             <div class="bot-card-header">
-              <img src="/alpha-website/src/assets/icons/20251215_204148.png" alt="Ticketer" class="bot-card-img">
+              <img src="src/assets/icons/20251215_204148.png" alt="Ticketer" class="bot-card-img">
               <div>
                 <h3 class="bot-card-title">Ticketer</h3>
                 <p class="bot-card-desc">Professional ticket management with transcripts</p>
@@ -70,7 +89,7 @@
 
           <article class="bot-card glass">
             <div class="bot-card-header">
-              <img src="/alpha-website/src/assets/icons/SystemLogoWhiteBG16.11.jpg" alt="System" class="bot-card-img">
+              <img src="src/assets/icons/SystemLogoWhiteBG16.11.jpg" alt="System" class="bot-card-img">
               <div>
                 <h3 class="bot-card-title">System</h3>
                 <p class="bot-card-desc">Automated bot integration & analytics</p>
@@ -165,8 +184,8 @@
   <template id="tpl-header">
     <header class="site-header" role="banner">
       <div class="container header-inner">
-        <a class="logo" href="/alpha-website/" title="Back to home">
-          <img src="/alpha-website/src/assets/icons/ble.jpg" alt="ARD0NIZ Logo" class="logo-img">
+        <a class="logo" href="/" title="Back to home">
+          <img src="src/assets/icons/ble.jpg" alt="ARD0NIZ Logo" class="logo-img">
           <div class="logo-meta">
             <span class="logo-text">ARD0NIZ</span>
             <span class="logo-sub">Bot Developer</span>
@@ -200,7 +219,7 @@
     <footer class="site-footer" role="contentinfo">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img src="/alpha-website/src/assets/icons/ble.jpg" alt="ARD0NIZ Logo" class="footer-logo">
+          <img src="src/assets/icons/ble.jpg" alt="ARD0NIZ Logo" class="footer-logo">
           <div>
             <strong>ARD0NIZ</strong>
             <div class="muted">© <span id="year"></span> Bot Developer & Community Leader</div>
@@ -215,21 +234,6 @@
       </div>
     </footer>
   </template>
-
-  <script>
-    // Auto-korrigiere Bildpfade für lokale und GitHub Pages Umgebungen
-    const isGitHubPages = window.location.hostname.includes('github.io');
-    const basePath = isGitHubPages ? '/alpha-website' : '';
-    
-    document.querySelectorAll('img, link[rel="icon"]').forEach(el => {
-      if (el.src && el.src.startsWith('/alpha-website/')) {
-        el.src = el.src.replace('/alpha-website/', basePath + '/');
-      }
-      if (el.href && el.href.startsWith('/alpha-website/')) {
-        el.href = el.href.replace('/alpha-website/', basePath + '/');
-      }
-    });
-  </script>
 
   <script src="src/js/main.js" defer></script>
 </body>

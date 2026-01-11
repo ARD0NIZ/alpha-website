@@ -60,12 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = hash.replace(/^#/, '');
     const el = document.getElementById(id);
     if (!el) return;
-    // compute offset to avoid sticky header overlap
     const header = document.querySelector('.site-header');
     const headerHeight = header ? header.getBoundingClientRect().height + 12 : 12;
     const top = el.getBoundingClientRect().top + window.scrollY - headerHeight;
     window.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
-    // update location without jumping
     history.replaceState(null, '', '#' + id);
   };
 
@@ -81,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Year set to:', yearEl.textContent);
     }
 
-    // if initial load has a hash, scroll to it (after components inserted)
     if (location.hash) {
       setTimeout(() => scrollToHash(location.hash), 140);
     }
