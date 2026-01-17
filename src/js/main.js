@@ -79,6 +79,20 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Year set to:', yearEl.textContent);
     }
 
+    // Set last updated date
+    const lastUpdatedEl = document.getElementById('last-updated-date');
+    if (lastUpdatedEl) {
+      const now = new Date();
+      lastUpdatedEl.textContent = now.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+    }
+
+    // Fetch GitHub stats
+    fetchGitHubStats();
+
     if (location.hash) {
       setTimeout(() => scrollToHash(location.hash), 140);
     }
@@ -145,6 +159,122 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setTimeout(syncGradients, 80);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) syncGradients(); });
+
+  // Animated Counter
+  function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const startTime = performance.now();
+    
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function
+      const easeOutQuad = progress => 1 - (1 - progress) * (1 - progress);
+      const current = Math.floor(start + (target - start) * easeOutQuad(progress));
+      
+      element.textContent = current;
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        element.textContent = target;
+      }
+    };
+    
+    requestAnimationFrame(animate);
+  }
+
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target;
+        
+        // Animate stat counters
+        if (element.classList.contains('stat-card')) {
+          element.classList.add('animated');
+          const numberEl = element.querySelector('.stat-number');
+          const target = parseInt(numberEl.dataset.count);
+          if (numberEl && !numberEl.dataset.animated) {
+            numberEl.dataset.animated = 'true';
+            animateCounter(numberEl, target);
+          }
+        }
+        
+        // Animate skill progress bars
+        if (element.classList.contains('skill-card')) {
+          element.classList.add('animated');
+          const progressBar = element.querySelector('.skill-progress');
+          const progress = progressBar.dataset.progress;
+          if (progressBar && progress) {
+            progressBar.style.width = progress + '%';
+          }
+        }
+        
+        // General fade-in animation
+        element.classList.add('animate-on-scroll', 'animated');
+        
+        observer.unobserve(element);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all animatable elements
+  setTimeout(() => {
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+    document.querySelectorAll('.section').forEach(el => observer.observe(el));
+  }, 100);
+
+  // Parallax effect for section titles
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrolled = window.scrollY;
+        document.querySelectorAll('.section-title').forEach(title => {
+          const rect = title.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const offset = (rect.top - window.innerHeight / 2) * 0.1;
+            title.style.transform = `translateY(${offset}px)`;
+          }
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Fetch GitHub stats
+  async function fetchGitHubStats() {
+    try {
+      const response = await fetch('https://api.github.com/users/ard0niz');
+      if (response.ok) {
+        const data = await response.json();
+        
+        const reposEl = document.getElementById('github-repos');
+        const followersEl = document.getElementById('github-followers');
+        
+        if (reposEl) {
+          animateCounter(reposEl, data.public_repos || 0, 1500);
+        }
+        if (followersEl) {
+          animateCounter(followersEl, data.followers || 0, 1500);
+        }
+      }
+    } catch (error) {
+      console.log('Could not fetch GitHub stats:', error);
+      const reposEl = document.getElementById('github-repos');
+      const followersEl = document.getElementById('github-followers');
+      if (reposEl) reposEl.textContent = 'N/A';
+      if (followersEl) followersEl.textContent = 'N/A';
+    }
+  }
 
   // Contact Form Handler
   const contactForm = document.getElementById('contactForm');

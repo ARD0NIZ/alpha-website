@@ -74,13 +74,102 @@
         </div>
       </section>
 
+      <section class="stats-section" aria-labelledby="stats-title">
+        <h2 id="stats-title" class="section-title">Stats & Achievements</h2>
+        <div class="stats-grid">
+          <div class="stat-card glass" data-animate>
+            <div class="stat-icon">🤖</div>
+            <div class="stat-number" data-count="5">0</div>
+            <div class="stat-label">Bots Created</div>
+          </div>
+          <div class="stat-card glass" data-animate>
+            <div class="stat-icon">📅</div>
+            <div class="stat-number" data-count="2018">2018</div>
+            <div class="stat-label">Since</div>
+          </div>
+          <div class="stat-card glass" data-animate>
+            <div class="stat-icon">👥</div>
+            <div class="stat-number" data-count="500">0</div>
+            <div class="stat-label">Community Members</div>
+          </div>
+          <div class="stat-card glass" data-animate>
+            <div class="stat-icon">⚡</div>
+            <div class="stat-number" data-count="24">0</div>
+            <div class="stat-label">Hours Uptime</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills-section" aria-labelledby="skills-title">
+        <h2 id="skills-title" class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid">
+          <div class="skill-card glass" data-animate>
+            <div class="skill-header">
+              <h3 class="skill-name">HTML</h3>
+              <span class="skill-percentage">95%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="95"></div>
+            </div>
+          </div>
+          <div class="skill-card glass" data-animate>
+            <div class="skill-header">
+              <h3 class="skill-name">CSS</h3>
+              <span class="skill-percentage">90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="90"></div>
+            </div>
+          </div>
+          <div class="skill-card glass" data-animate>
+            <div class="skill-header">
+              <h3 class="skill-name">JavaScript</h3>
+              <span class="skill-percentage">85%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="85"></div>
+            </div>
+          </div>
+          <div class="skill-card glass" data-animate>
+            <div class="skill-header">
+              <h3 class="skill-name">BDFD</h3>
+              <span class="skill-percentage">90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="90"></div>
+            </div>
+          </div>
+          <div class="skill-card glass" data-animate>
+            <div class="skill-header">
+              <h3 class="skill-name">Aoi.js</h3>
+              <span class="skill-percentage">85%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="85"></div>
+            </div>
+          </div>
+          <div class="skill-card glass" data-animate>
+            <div class="skill-header">
+              <h3 class="skill-name">ForgeScript</h3>
+              <span class="skill-percentage">80%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="80"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="bots" class="section" aria-labelledby="bots-title">
         <h2 id="bots-title" class="section-title">My Bots</h2>
 
         <div class="bots-grid">
           <article class="bot-card glass">
             <div class="bot-card-header">
-              <img src="src/assets/icons/20251215_204148.png" alt="Ticketer" class="bot-card-img">
+              <div class="bot-img-wrapper">
+                <img src="src/assets/icons/20251215_204148.png" alt="Ticketer" class="bot-card-img">
+                <span class="bot-status online" title="Online" data-bot-id="1038395326354161684"></span>
+              </div>
               <div>
                 <h3 class="bot-card-title">Ticketer</h3>
                 <p class="bot-card-desc">Professional ticket management with transcripts</p>
@@ -94,7 +183,10 @@
 
           <article class="bot-card glass">
             <div class="bot-card-header">
-              <img src="src/assets/icons/SystemLogoWhiteBG16.11.jpg" alt="System" class="bot-card-img">
+              <div class="bot-img-wrapper">
+                <img src="src/assets/icons/SystemLogoWhiteBG16.11.jpg" alt="System" class="bot-card-img">
+                <span class="bot-status online" title="Online" data-bot-id="1035291709719969932"></span>
+              </div>
               <div>
                 <h3 class="bot-card-title">System</h3>
                 <p class="bot-card-desc">Automated bot integration & analytics</p>
@@ -228,10 +320,40 @@
           </div>
         </div>
 
-        <div class="footer-links">
-          <a href="https://github.com/ard0niz/alpha-website" target="_blank" rel="noopener" title="Visit my GitHub">GitHub</a>
-          <a href="https://discord.gg/5dGWwdHa3e" target="_blank" rel="noopener" title="Join Discord Server">Discord</a>
-          <a href="#connect" title="Get in touch">Contact</a>
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4 class="footer-heading">Quick Links</h4>
+            <div class="footer-links-list">
+              <a href="https://ard0niz.github.io/ticketer" target="_blank" rel="noopener">Ticketer Docs</a>
+              <a href="https://ard0niz.github.io/system" target="_blank" rel="noopener">System Docs</a>
+              <a href="#connect">Contact</a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h4 class="footer-heading">GitHub Activity</h4>
+            <div class="github-stats">
+              <div class="github-stat">
+                <span class="stat-value" id="github-repos">--</span>
+                <span class="stat-label">Repositories</span>
+              </div>
+              <div class="github-stat">
+                <span class="stat-value" id="github-followers">--</span>
+                <span class="stat-label">Followers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-links">
+            <a href="https://github.com/ard0niz/alpha-website" target="_blank" rel="noopener" title="Visit my GitHub">GitHub</a>
+            <a href="https://discord.gg/5dGWwdHa3e" target="_blank" rel="noopener" title="Join Discord Server">Discord</a>
+            <a href="#connect" title="Get in touch">Contact</a>
+          </div>
+          <div class="footer-meta">
+            <span class="last-updated">Last Updated: <span id="last-updated-date">--</span></span>
+          </div>
         </div>
       </div>
     </footer>
