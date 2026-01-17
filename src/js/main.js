@@ -1,6 +1,11 @@
 // Robust component loader + mobile nav + gradient sync
 document.addEventListener('DOMContentLoaded', () => {
   const isFileProtocol = window.location.protocol === 'file:';
+  
+  // Configuration
+  const CONFIG = {
+    githubUsername: 'ard0niz'
+  };
 
   const insertContent = (el, html) => {
     if (!el) return;
@@ -233,11 +238,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Parallax effect for section titles
   let ticking = false;
+  let sectionTitles = [];
+  
+  // Cache section titles
+  setTimeout(() => {
+    sectionTitles = Array.from(document.querySelectorAll('.section-title'));
+  }, 100);
+  
   window.addEventListener('scroll', () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         const scrolled = window.scrollY;
-        document.querySelectorAll('.section-title').forEach(title => {
+        sectionTitles.forEach(title => {
           const rect = title.getBoundingClientRect();
           if (rect.top < window.innerHeight && rect.bottom > 0) {
             const offset = (rect.top - window.innerHeight / 2) * 0.1;
@@ -253,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch GitHub stats
   async function fetchGitHubStats() {
     try {
-      const response = await fetch('https://api.github.com/users/ard0niz');
+      const response = await fetch(`https://api.github.com/users/${CONFIG.githubUsername}`);
       if (response.ok) {
         const data = await response.json();
         
